@@ -32,13 +32,20 @@ var client = new discord_js_1.default.Client({
     ]
 });
 client.on('ready', function () {
+    var _a;
     console.log('MahchiiBot is online!');
-});
-client.on('messageCreate', function (message) {
-    if (message.content === 'ping') {
-        message.reply({
-            content: 'pong',
-        });
+    var guildId = '739914621045178422';
+    var guild = client.guilds.cache.get(guildId);
+    var commands;
+    if (guild) {
+        commands = guild.commands;
     }
+    else {
+        commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
+    }
+    commands === null || commands === void 0 ? void 0 : commands.create({
+        name: 'ping',
+        description: 'replies with pong'
+    });
 });
 client.login(process.env.TOKEN);
