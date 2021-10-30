@@ -24,6 +24,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = __importStar(require("discord.js"));
 var dotenv_1 = __importDefault(require("dotenv"));
+var wokcommands_1 = __importDefault(require("wokcommands"));
+var path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 var client = new discord_js_1.default.Client({
     intents: [
@@ -32,20 +34,10 @@ var client = new discord_js_1.default.Client({
     ]
 });
 client.on('ready', function () {
-    var _a;
     console.log('MahchiiBot is online!');
-    var guildId = '739914621045178422';
-    var guild = client.guilds.cache.get(guildId);
-    var commands;
-    if (guild) {
-        commands = guild.commands;
-    }
-    else {
-        commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
-    }
-    commands === null || commands === void 0 ? void 0 : commands.create({
-        name: 'ping',
-        description: 'replies with pong'
+    new wokcommands_1.default(client, {
+        commandsDir: path_1.default.join(__dirname, 'commands'),
+        testServers: '789648149537882162',
     });
 });
 client.login(process.env.TOKEN);

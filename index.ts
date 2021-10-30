@@ -1,5 +1,7 @@
-import DiscordJS, { Intents } from 'discord.js'
+import DiscordJS, { Intents, Interaction } from 'discord.js'
 import dotenv from 'dotenv'
+import WOKCommands from 'wokcommands'
+import path from 'path'
 dotenv.config()
 
 const client = new DiscordJS.Client({
@@ -13,22 +15,10 @@ const client = new DiscordJS.Client({
 client.on('ready', () =>{
     console.log('MahchiiBot is online!')
 
-
-const guildId = '789648149537882162'
-const guild = client.guilds.cache.get(guildId)
-let commands 
-
-if(guild){
-    commands = guild.commands
-}else{
-    commands = client.application?.commands
-}
-
-commands?.create({
-    name: 'ping',
-    description: 'replies with pong'
-})
-
+    new WOKCommands(client, {
+        commandsDir: path.join(__dirname, 'commands'),
+        testServers: '789648149537882162',
+    })
 })
 
 client.login(process.env.TOKEN)
