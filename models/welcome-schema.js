@@ -18,26 +18,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var discord_js_1 = __importStar(require("discord.js"));
-var dotenv_1 = __importDefault(require("dotenv"));
-var wokcommands_1 = __importDefault(require("wokcommands"));
-var path_1 = __importDefault(require("path"));
-dotenv_1.default.config();
-var client = new discord_js_1.default.Client({
-    intents: [
-        discord_js_1.Intents.FLAGS.GUILDS,
-        discord_js_1.Intents.FLAGS.GUILD_MESSAGES
-    ]
+var mongoose_1 = __importStar(require("mongoose"));
+var reqString = {
+    type: String,
+    required: true
+};
+var welcomeSchema = new mongoose_1.Schema({
+    _id: reqString,
+    channelId: reqString,
+    text: reqString
 });
-client.on('ready', function () {
-    new wokcommands_1.default(client, {
-        commandsDir: path_1.default.join(__dirname, 'commands'),
-        testServers: ['789648149537882162'],
-        mongoUri: process.env.MONGO_URI
-    });
-});
-client.login(process.env.TOKEN);
+var name = 'welcome-tutorial';
+exports.default = mongoose_1.default.models[name] || mongoose_1.default.model(name, welcomeSchema, name);

@@ -13,11 +13,10 @@ const client = new DiscordJS.Client({
 })
 
 client.on('ready', () =>{
-    console.log('MahchiiBot is online!')
-
     new WOKCommands(client, {
         commandsDir: path.join(__dirname, 'commands'),
-        testServers: '789648149537882162',
+        testServers: ['789648149537882162'],
+        mongoUri: process.env.MONGO_URI
     })
 })
 

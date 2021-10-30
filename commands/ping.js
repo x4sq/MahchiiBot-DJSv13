@@ -6,7 +6,6 @@ exports.default = {
     slash: 'both',
     testOnly: true,
     callback: function (_a) {
-        var message = _a.message, interaction = _a.interaction;
         return 'Pong';
     }
 };

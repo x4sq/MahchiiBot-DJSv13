@@ -7,7 +7,7 @@ export default {
     slash: 'both',
     testOnly: true,
     
-    callback: ({ message, interaction }) =>{
+    callback: ({}) =>{
         return 'Pong'
     }
 } as ICommand
