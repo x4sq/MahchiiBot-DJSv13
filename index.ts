@@ -15,6 +15,7 @@ const client = new DiscordJS.Client({
 client.on('ready', () =>{
     new WOKCommands(client, {
         commandsDir: path.join(__dirname, 'commands'),
+        featuresDir: path.join(__dirname, 'features'),
         testServers: ['789648149537882162'],
         mongoUri: process.env.MONGO_URI
     })

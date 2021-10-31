@@ -36,6 +36,7 @@ var client = new discord_js_1.default.Client({
 client.on('ready', function () {
     new wokcommands_1.default(client, {
         commandsDir: path_1.default.join(__dirname, 'commands'),
+        featuresDir: path_1.default.join(__dirname, 'features'),
         testServers: ['789648149537882162'],
         mongoUri: process.env.MONGO_URI
     });
