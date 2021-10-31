@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var discord_js_1 = require("discord.js");
 exports.default = {
     category: 'Moderation',
     description: 'Clear/purges the channels messages.',
@@ -49,7 +50,7 @@ exports.default = {
     callback: function (_a) {
         var message = _a.message, interaction = _a.interaction, channel = _a.channel, args = _a.args;
         return __awaiter(void 0, void 0, void 0, function () {
-            var amount, messages, size, reply;
+            var amount, size, reply;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -59,12 +60,14 @@ exports.default = {
                     case 1:
                         _b.sent();
                         _b.label = 2;
-                    case 2: return [4 /*yield*/, channel.messages.fetch({ limit: amount })];
+                    case 2: return [4 /*yield*/, channel.bulkDelete(amount, true)];
                     case 3:
-                        messages = _b.sent();
-                        size = messages.size;
-                        messages.forEach(function (message) { return message.delete(); });
-                        reply = "Deleted " + size + " message(s) successfully.";
+                        size = (_b.sent()).size;
+                        reply = new discord_js_1.MessageEmbed()
+                            .setAuthor('MahchiiBot', 'https://cdn.discordapp.com/avatars/904059851104215080/bce063dde4cdd1fc2e9afb5bc217d440.png?size=60')
+                            .setTimestamp()
+                            .setDescription("Deleted " + size + " message(s) from <#" + channel + "> successfully.")
+                            .setColor('WHITE');
                         if (interaction) {
                             return [2 /*return*/, reply];
                         }

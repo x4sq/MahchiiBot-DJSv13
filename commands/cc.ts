@@ -1,3 +1,4 @@
+import { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -21,14 +22,15 @@ export default {
             await message.delete()
         }
 
+        const { size } = await channel.bulkDelete(amount, true)
 
 
-        const messages = await channel.messages.fetch({ limit: amount })
-        const { size } = messages
+        const reply = new MessageEmbed()
+        .setAuthor('MahchiiBot', 'https://cdn.discordapp.com/avatars/904059851104215080/bce063dde4cdd1fc2e9afb5bc217d440.png?size=60')
+        .setTimestamp()
+        .setDescription(`Deleted ${size} message(s) from <#${channel}> successfully.`)
+        .setColor('WHITE')
 
-        messages.forEach((message) => message.delete())
-
-        const reply = `Deleted ${size} message(s) successfully.`
 
         if(interaction){
             return reply
@@ -37,3 +39,4 @@ export default {
 
     }
 } as ICommand
+
