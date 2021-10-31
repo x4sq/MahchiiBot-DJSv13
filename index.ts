@@ -17,6 +17,7 @@ client.on('ready', () =>{
         commandsDir: path.join(__dirname, 'commands'),
         featuresDir: path.join(__dirname, 'features'),
         testServers: ['789648149537882162'],
+        botOwners: ['354770008804425743'],
         mongoUri: process.env.MONGO_URI
     })
 })
